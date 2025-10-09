@@ -1,13 +1,13 @@
-from functions import loginverify, screen
+from functions import loginverify, screen, route
 from time import sleep
-
+posicao_tipo=""
 
 while True:
     logins = open("logins.txt")
     linhas = logins.read().splitlines()
     logins.close()
 
-    
+
     screen.menu()
     opc = int(input("opc = "))
     screen.clear()
@@ -19,8 +19,10 @@ while True:
             posicao_senha = linhas.index(email)+1
             if linhas[posicao_senha] == senha:
                 posicao_tipo = linhas.index(email)-1
-                print(f"Entrando como {linhas[posicao_tipo]}")
-                break
+                sleep(0.5)
+                print(f"Entrando como {linhas[posicao_tipo]}...")
+                sleep(1)
+                screen.clear()
             else:
                 print("Email ou senha incorretos...")
                 sleep(2)
@@ -41,11 +43,19 @@ while True:
 
     if opc == 3:
         break
-if linhas[posicao_tipo] == "administrador":
-    print("adm entrou")
 
-if linhas[posicao_tipo] == "aluno":
-    print("Aluno entrou")
+    opc=None
 
-if linhas[posicao_tipo] == "motorista":
-    print("motorista entrou")
+    while posicao_tipo != "":
+        route.caminho_adm(linhas, posicao_tipo)
+        
+
+        
+
+
+
+#        if linhas[posicao_tipo] == "aluno":
+#            print("Aluno entrou")
+
+#        if linhas[posicao_tipo] == "motorista":
+#            print("motorista entrou")
