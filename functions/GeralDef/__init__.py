@@ -1,3 +1,7 @@
+from functions import screen
+from time import sleep
+import csv
+
 def PasswordReset(email):
     from random import randint
     logins = open("logins.txt")
@@ -53,3 +57,51 @@ def CreateNotice():
         avisos.close()
 
         print("Aviso salvo com sucesso")
+
+def caminho_adm(linhas, posicao_tipo):
+    if linhas[posicao_tipo] == "administrador":
+        screen.menu_adm(linhas[posicao_tipo])
+        opc = int(input("opc = "))
+        screen.clear()
+
+        if opc == 1:
+
+            with open("lista_de_alunos.txt", "r") as arquivo:
+                alunos=arquivo.read().splitlines()
+
+                lista={}
+
+                for pessoa in alunos:
+                    if ";" not in pessoa:
+                        continue
+
+                    aluno = pessoa.split(";")[0]
+                    faculdade = pessoa.split(";")[1]
+                    lista[aluno.strip()] = faculdade.strip()
+
+                for aluno, faculdade in lista.items():
+                    print(f"{aluno} — {faculdade}")
+                while True:
+                    opc=int(input('''
+[1]: Exportar para CSV
+[2]: Sair                      
+'''))
+                    if opc==1:
+                        screen.clear()
+                        print("Exportando...")
+                        sleep(0.2)
+                        with open("alunos_exportados.csv", "w", newline="", encoding="cp1252") as csvfile:
+                            writer = csv.writer(csvfile, delimiter=";")
+                            writer.writerow(["Aluno", "Faculdade"])
+                            for aluno, faculdade in lista.items():
+                                writer.writerow([aluno, faculdade])
+                        print("Exportado com sucesso para 'alunos_exportados.csv'!\n")
+                        sleep(1)
+                        
+                    elif opc == 2:
+                        print("Saindo...")
+                        sleep(0.5)
+                        break
+
+                    else:
+                        print("Opção inválida! Tente novamente.")
