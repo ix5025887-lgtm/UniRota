@@ -1,13 +1,8 @@
-Eduardo
-IFBA
-Garagem Brasileiro
-Posto Pajet
-True
-True
-
-João
-Unopar
--
-Centro de Cultura
-False
-True
+João vitor;Faes
+Pedro piu;Ifba
+Icaro;Ifba
+Edudu;Unopar
+Jorvane;Pitagoras
+Lucas;Eunatec
+João Batisado;Faes
+Bia;Pitagoras
